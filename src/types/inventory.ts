@@ -22,19 +22,26 @@ export interface BusinessProfile {
 export interface Product {
   id: string;
   sku: string;
+  barcode: string;
   businessId: string;
   name: string;
+  brand: string;
+  packagingSize: string;
   category: string;
+  imageUrl: string;
   currentStock: number;
   minStockLevel: number;
+  reorderLevel: number;
   maxStockLevel: number;
   unitPrice: number;
   unitCost: number;
   supplierName: string;
   leadTimeDays: number;
   incomingStock: number;
+  expiryDate?: string;
   seasonalTag: 'Year-Round' | 'Holiday Peak' | 'Winter Seasonal' | 'Summer Peak' | 'Back-to-School';
   promoActive: boolean;
+  description?: string;
   lastUpdated: string;
 }
 
@@ -198,11 +205,18 @@ export type AppView =
   | 'forecasting'
   | 'recommendations'
   | 'inventory'
+  | 'catalogue'
+  | 'sales-analytics'
+  | 'suppliers'
   | 'purchase-plan'
   | 'simulator'
-  | 'settings';
+  | 'reports'
+  | 'notifications'
+  | 'settings'
+  | 'profile';
 
 export interface SmartStockState {
+  seedVersion?: number;
   businesses: BusinessProfile[];
   activeBusinessId: string;
   products: Product[];

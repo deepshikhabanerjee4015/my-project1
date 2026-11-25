@@ -1,25 +1,66 @@
 @import "tailwindcss";
 
+:root {
+  /* Core Muted Burgundy & Champagne Palette */
+  --ss-deep-burgundy: #49383D;
+  --ss-muted-burgundy: #805F69;
+  --ss-dusty-rose: #B99AA0;
+  --ss-soft-blush: #E9DDE0;
+  --ss-warm-ivory: #F7F3F1;
+  --ss-white: #FFFFFF;
+
+  /* Supporting Tokens */
+  --ss-text-primary: #3F3437;
+  --ss-text-secondary: #81777A;
+  --ss-text-muted: #A69B9E;
+  --ss-border: #E8DFE1;
+  --ss-light-surface: #FBF8F7;
+  --ss-input-bg: #FFFFFF;
+
+  /* Restrained Status Tokens */
+  --ss-healthy: #779384;
+  --ss-warning: #C3A16D;
+  --ss-critical: #BC7777;
+  --ss-info: #8296A8;
+
+  /* Data Visualisation Tokens */
+  --ss-chart-actual: #805F69;
+  --ss-chart-predicted: #B99AA0;
+  --ss-chart-historical: #8296A8;
+  --ss-chart-movement: #779384;
+  --ss-chart-revenue: #49383D;
+  --ss-chart-secondary: #C5AEB2;
+  --ss-chart-band: #E9DDE0;
+  --ss-chart-baseline: #E8DFE1;
+}
+
 @theme {
   --font-display: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-navy-950: #101B2D;
-  --color-navy-800: #263B55;
-  --color-canvas: #F6F8FB;
-  --color-ink: #202B3C;
-  --color-muted: #738096;
-  --color-emerald-accent: #16A36A;
-  --color-blue-accent: #4C7FE8;
-  --color-amber-warn: #E9A23B;
-  --color-red-alert: #DC5555;
+  --color-deep-burgundy: #49383D;
+  --color-muted-burgundy: #805F69;
+  --color-dusty-rose: #B99AA0;
+  --color-soft-blush: #E9DDE0;
+  --color-warm-ivory: #F7F3F1;
+  --color-light-surface: #FBF8F7;
+  --color-border-blush: #E8DFE1;
+  --color-text-primary: #3F3437;
+  --color-text-secondary: #81777A;
+  --color-text-muted: #A69B9E;
+  --color-healthy: #779384;
+  --color-warning: #C3A16D;
+  --color-critical: #BC7777;
+  --color-info: #8296A8;
 }
 
 @layer base {
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
+    background-color: var(--ss-warm-ivory);
+    color: var(--ss-text-primary);
   }
 
   h1, h2, h3, h4, .font-display {
@@ -29,6 +70,29 @@
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
+
+  input[type="range"] {
+    accent-color: #805F69;
+  }
+
+  input[type="checkbox"] {
+    accent-color: #805F69;
+  }
+}
+
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-view-enter {
+  animation: viewFadeIn 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

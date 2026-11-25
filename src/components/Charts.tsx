@@ -1,5 +1,81 @@
 import React, { useMemo, useState } from 'react';
 import type { ForecastPoint } from '../types/inventory';
+import { formatINRCompact } from '../lib/currency';
+
+export const Sparkline: React.FC<{
+  values: number[];
+  color?: string;
+  height?: number;
+}> = ({ values, color = '#805F69', height = 34 }) => {
+  if (values.length < 2) return null;
+  const w = 140;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const span = Math.max(1, max - min);
+
+  const pts = values.map((v, i) => {
+    const x = (i / (values.length - 1)) * w;
+    const y = height - 4 - ((v - min) / span) * (height - 8);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+
+  const lineD = `M${pts.join(' L')}`;
+  const areaD = `${lineD} L${w},${height} L0,${height} Z`;
+
+  return (
+    <svg viewBox={`0 0 ${w} ${height}`} className="w-full h-auto overflow-visible" aria-hidden="true">
+      <path d={areaD} fill={color} fillOpacity="0.1" />
+      <path
+        d={lineD}
+        fill="none"
+        stroke={color}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const HealthGauge: React.FC<{
+  score: number;
+  size?: number;
+}> = ({ score, size = 56 }) => {
+  const clamped = Math.max(0, Math.min(100, score));
+  const stroke = 6;
+  const radius = (size - stroke) / 2;
+  const circumference = Math.PI * radius;
+  const offset = circumference * (1 - clamped / 100);
+  const color = clamped >= 65 ? '#779384' : clamped >= 40 ? '#C3A16D' : '#BC7777';
+
+  return (
+    <svg
+      width={size}
+      height={size * 0.65}
+      viewBox={`0 0 ${size} ${size * 0.65}`}
+      aria-label={`Inventory health score ${clamped}%`}
+      className="shrink-0 overflow-visible"
+    >
+      <path
+        d={`M ${stroke / 2} ${size / 2} A ${radius} ${radius} 0 0 1 ${size - stroke / 2} ${size / 2}`}
+        fill="none"
+        stroke="#FBF8F7"
+        strokeWidth={stroke}
+        strokeLinecap="round"
+      />
+      <path
+        d={`M ${stroke / 2} ${size / 2} A ${radius} ${radius} 0 0 1 ${size - stroke / 2} ${size / 2}`}
+        fill="none"
+        stroke={color}
+        strokeWidth={stroke}
+        strokeLinecap="round"
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+        className="transition-all duration-300"
+      />
+    </svg>
+  );
+};
 
 interface ForecastLineChartProps {
   points: ForecastPoint[];
@@ -19,7 +95,7 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
   const width = 760;
   const padLeft = compact ? 36 : 46;
   const padRight = 18;
-  const padTop = 18;
+  const padTop = 20;
   const padBottom = compact ? 26 : 32;
   const plotW = width - padLeft - padRight;
   const plotH = height - padTop - padBottom;
@@ -48,7 +124,11 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
 
   const actualPath = useMemo(() => {
     const pts = points
-      .map((p, i) => (p.actual !== undefined ? `${i === 0 ? 'M' : 'L'}${xFor(i).toFixed(1)},${yFor(p.actual).toFixed(1)}` : null))
+      .map((p, i) =>
+        p.actual !== undefined
+          ? `${i === 0 ? 'M' : 'L'}${xFor(i).toFixed(1)},${yFor(p.actual).toFixed(1)}`
+          : null
+      )
       .filter(Boolean);
     return pts.join(' ');
   }, [points, maxVal]);
@@ -107,6 +187,7 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
   }, [points, compact]);
 
   const hovered = hoverIdx !== null ? points[hoverIdx] : null;
+  const splitX = splitIdx > 0 ? xFor(splitIdx - 1) : null;
 
   return (
     <div className="relative w-full select-none">
@@ -116,11 +197,23 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
         onMouseLeave={() => setHoverIdx(null)}
       >
         <defs>
-          <linearGradient id="actualFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#4C7FE8" stopOpacity="0.14" />
-            <stop offset="100%" stopColor="#4C7FE8" stopOpacity="0.01" />
+          <linearGradient id="actualAreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#B99AA0" stopOpacity="0.26" />
+            <stop offset="100%" stopColor="#E9DDE0" stopOpacity="0.04" />
           </linearGradient>
         </defs>
+
+        {/* Distinct Forecast Region Background (Soft Blush) */}
+        {splitX !== null && (
+          <rect
+            x={splitX}
+            y={padTop}
+            width={Math.max(0, width - padRight - splitX)}
+            height={plotH}
+            fill="#E9DDE0"
+            fillOpacity="0.32"
+          />
+        )}
 
         {/* Horizontal gridlines */}
         {yTicks.map((t) => {
@@ -132,14 +225,14 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
                 x2={width - padRight}
                 y1={y}
                 y2={y}
-                stroke="#E2E8F0"
+                stroke="#E8DFE1"
                 strokeWidth="1"
               />
               <text
                 x={padLeft - 8}
                 y={y + 4}
                 textAnchor="end"
-                className="fill-[#738096] text-[11px] font-mono tabular-nums"
+                className="fill-[#81777A] text-[11px] font-mono tabular-nums"
               >
                 {t}
               </text>
@@ -148,22 +241,22 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
         })}
 
         {/* Forecast start vertical divider */}
-        {splitIdx > 0 && (
+        {splitX !== null && (
           <g>
             <line
-              x1={xFor(splitIdx - 1)}
-              x2={xFor(splitIdx - 1)}
+              x1={splitX}
+              x2={splitX}
               y1={padTop}
               y2={padTop + plotH}
-              stroke="#94A3B8"
+              stroke="#B99AA0"
               strokeDasharray="3 3"
               strokeWidth="1"
             />
             {!compact && (
               <text
-                x={xFor(splitIdx - 1) + 6}
-                y={padTop + 11}
-                className="fill-[#16A36A] text-[10px] font-medium"
+                x={splitX + 7}
+                y={padTop + 12}
+                className="fill-[#805F69] text-[10px] font-semibold"
               >
                 Forecast Horizon
               </text>
@@ -171,30 +264,27 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
           </g>
         )}
 
-        {/* Shaded historical area & 90% confidence band */}
-        {actualAreaPath && <path d={actualAreaPath} fill="url(#actualFill)" />}
+        {actualAreaPath && <path d={actualAreaPath} fill="url(#actualAreaGrad)" />}
         {confidenceBandPath && (
-          <path d={confidenceBandPath} fill="#16A36A" fillOpacity="0.12" />
+          <path d={confidenceBandPath} fill="#E9DDE0" fillOpacity="0.65" />
         )}
 
-        {/* Actual sales solid line */}
         {actualPath && (
           <path
             d={actualPath}
             fill="none"
-            stroke="#101B2D"
+            stroke="#805F69"
             strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
         )}
 
-        {/* Predicted demand dashed line */}
         {forecastPath && (
           <path
             d={forecastPath}
             fill="none"
-            stroke="#16A36A"
+            stroke="#B99AA0"
             strokeWidth="2.4"
             strokeDasharray="6 4"
             strokeLinecap="round"
@@ -202,7 +292,6 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
           />
         )}
 
-        {/* X-Axis date labels */}
         {xLabelIndices.map((idx) => {
           const pt = points[idx];
           if (!pt) return null;
@@ -212,14 +301,13 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
               x={xFor(idx)}
               y={height - 6}
               textAnchor="middle"
-              className="fill-[#738096] text-[11px] font-mono tabular-nums"
+              className="fill-[#81777A] text-[11px] font-mono tabular-nums"
             >
               {pt.date.slice(5)}
             </text>
           );
         })}
 
-        {/* Hover crosshair */}
         {hoverIdx !== null && hovered && (
           <g>
             <line
@@ -227,16 +315,16 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
               x2={xFor(hoverIdx)}
               y1={padTop}
               y2={padTop + plotH}
-              stroke="#263B55"
+              stroke="#805F69"
               strokeWidth="1"
-              strokeOpacity="0.4"
+              strokeOpacity="0.45"
             />
             {hovered.actual !== undefined && (
               <circle
                 cx={xFor(hoverIdx)}
                 cy={yFor(hovered.actual)}
                 r="4.5"
-                fill="#101B2D"
+                fill="#805F69"
                 stroke="#FFFFFF"
                 strokeWidth="2"
               />
@@ -246,7 +334,7 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
                 cx={xFor(hoverIdx)}
                 cy={yFor(hovered.predicted)}
                 r="4.5"
-                fill="#16A36A"
+                fill="#B99AA0"
                 stroke="#FFFFFF"
                 strokeWidth="2"
               />
@@ -254,7 +342,6 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
           </g>
         )}
 
-        {/* Invisible hover columns for crisp snapping */}
         {points.map((_, idx) => {
           const colW = Math.max(4, plotW / Math.max(1, points.length));
           return (
@@ -272,24 +359,22 @@ export const ForecastLineChart: React.FC<ForecastLineChartProps> = ({
       </svg>
 
       {hoverIdx !== null && hovered && (
-        <div
-          className="pointer-events-none absolute top-2 right-3 bg-[#101B2D] text-white px-3 py-2 rounded-lg text-xs shadow-sm border border-[#263B55]"
-        >
-          <div className="font-mono text-[11px] text-slate-300 mb-1">{hovered.date}</div>
+        <div className="pointer-events-none absolute top-2 right-3 bg-[#49383D] text-white px-3 py-2 rounded-lg text-xs shadow-md border border-[#805F69]">
+          <div className="font-mono text-[11px] text-[#E9DDE0] mb-1">{hovered.date}</div>
           {hovered.actual !== undefined && (
             <div className="flex items-center justify-between gap-4 tabular-nums">
-              <span className="text-slate-200">Actual Sales</span>
+              <span className="text-[#FBF8F7]">Actual Sales</span>
               <span className="font-semibold font-mono">{hovered.actual} units</span>
             </div>
           )}
           {hovered.predicted !== undefined && (
             <div className="flex items-center justify-between gap-4 tabular-nums">
-              <span className="text-emerald-300">Predicted Demand</span>
+              <span className="text-[#E9DDE0]">Predicted Demand</span>
               <span className="font-semibold font-mono">{hovered.predicted} units</span>
             </div>
           )}
           {hovered.lowerBound !== undefined && hovered.upperBound !== undefined && (
-            <div className="flex items-center justify-between gap-4 tabular-nums text-[11px] text-slate-300 mt-0.5">
+            <div className="flex items-center justify-between gap-4 tabular-nums text-[11px] text-[#E9DDE0]/85 mt-0.5">
               <span>90% Range</span>
               <span className="font-mono">
                 {hovered.lowerBound} – {hovered.upperBound}
@@ -312,44 +397,116 @@ interface DistributionSegment {
 export const InventoryDistributionChart: React.FC<{
   segments: DistributionSegment[];
 }> = ({ segments }) => {
+  const [hoveredLabel, setHoveredLabel] = useState<string | null>(null);
   const totalCount = segments.reduce((s, x) => s + x.count, 0) || 1;
+  const radius = 40;
+  const circumference = 2 * Math.PI * radius;
+
+  const arcs = useMemo(() => {
+    let cumulative = 0;
+    return segments
+      .filter((seg) => seg.count > 0)
+      .map((seg) => {
+        const fraction = seg.count / totalCount;
+        const length = fraction * circumference;
+        const dashOffset = -cumulative;
+        cumulative += length;
+        return { ...seg, length, dashOffset };
+      });
+  }, [segments, totalCount, circumference]);
+
+  const activeSegment = segments.find((s) => s.label === hoveredLabel);
+
   return (
     <div className="space-y-4">
-      <div className="h-3.5 w-full rounded-md overflow-hidden flex bg-slate-100">
-        {segments.map((seg) =>
-          seg.count > 0 ? (
-            <div
-              key={seg.label}
-              style={{
-                width: `${(seg.count / totalCount) * 100}%`,
-                backgroundColor: seg.color,
-              }}
-              className="h-full transition-all duration-300"
-              title={`${seg.label}: ${seg.count} SKUs`}
+      <div className="flex items-center gap-5">
+        {/* Donut Chart */}
+        <div className="relative w-28 h-28 shrink-0 flex items-center justify-center">
+          <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
+            <circle
+              cx="50"
+              cy="50"
+              r={radius}
+              fill="none"
+              stroke="#FBF8F7"
+              strokeWidth="12"
             />
-          ) : null
-        )}
+            {arcs.map((arc) => (
+              <circle
+                key={arc.label}
+                cx="50"
+                cy="50"
+                r={radius}
+                fill="none"
+                stroke={arc.color}
+                strokeWidth={hoveredLabel === arc.label ? '14' : '12'}
+                strokeDasharray={`${arc.length} ${circumference}`}
+                strokeDashoffset={arc.dashOffset}
+                className="transition-all duration-200 cursor-pointer"
+                onMouseEnter={() => setHoveredLabel(arc.label)}
+                onMouseLeave={() => setHoveredLabel(null)}
+              />
+            ))}
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+            <span className="font-mono font-bold text-base text-[#49383D] tabular-nums">
+              {activeSegment ? activeSegment.count : totalCount}
+            </span>
+            <span className="text-[10px] text-[#81777A]">
+              {activeSegment ? activeSegment.label.split(' ')[0] : 'SKUs'}
+            </span>
+          </div>
+        </div>
+
+        {/* Stacked Horizontal Ratio Bar + Summary */}
+        <div className="flex-1 space-y-2 min-w-0">
+          <div className="h-2.5 w-full rounded-md overflow-hidden flex bg-[#FBF8F7]">
+            {segments.map((seg) =>
+              seg.count > 0 ? (
+                <div
+                  key={seg.label}
+                  style={{
+                    width: `${(seg.count / totalCount) * 100}%`,
+                    backgroundColor: seg.color,
+                  }}
+                  className="h-full transition-all duration-300"
+                  title={`${seg.label}: ${seg.count} SKUs`}
+                />
+              ) : null
+            )}
+          </div>
+          <p className="text-[11px] text-[#81777A] leading-snug">
+            Hover segments to inspect stock tier concentration across active SKUs.
+          </p>
+        </div>
       </div>
 
-      <div className="divide-y divide-slate-100">
+      <div className="divide-y divide-[#E8DFE1]">
         {segments.map((seg) => {
           const pct = ((seg.count / totalCount) * 100).toFixed(0);
           return (
-            <div key={seg.label} className="py-2.5 flex items-center justify-between text-sm">
+            <div
+              key={seg.label}
+              onMouseEnter={() => setHoveredLabel(seg.label)}
+              onMouseLeave={() => setHoveredLabel(null)}
+              className={`py-2.5 px-1.5 -mx-1.5 rounded-md flex items-center justify-between text-xs transition-colors ${
+                hoveredLabel === seg.label ? 'bg-[#E9DDE0]/45' : ''
+              }`}
+            >
               <div className="flex items-center gap-2.5">
                 <span
-                  className="w-2.5 h-2.5 rounded-sm shrink-0"
+                  className="w-2.5 h-2.5 rounded-xs shrink-0"
                   style={{ backgroundColor: seg.color }}
                 />
-                <span className="text-[#202B3C] font-medium">{seg.label}</span>
+                <span className="text-[#3F3437] font-medium">{seg.label}</span>
               </div>
-              <div className="flex items-center gap-5 tabular-nums font-mono text-xs">
-                <span className="text-[#738096]">{pct}%</span>
-                <span className="text-[#202B3C] font-semibold w-14 text-right">
+              <div className="flex items-center gap-4 tabular-nums font-mono">
+                <span className="text-[#81777A]">{pct}%</span>
+                <span className="text-[#49383D] font-semibold w-14 text-right">
                   {seg.count} SKUs
                 </span>
-                <span className="text-[#738096] w-20 text-right">
-                  ${Math.round(seg.value).toLocaleString()}
+                <span className="text-[#81777A] w-20 text-right">
+                  {formatINRCompact(seg.value)}
                 </span>
               </div>
             </div>
@@ -372,7 +529,7 @@ export const TopProductsBarChart: React.FC<{
 }> = ({ items }) => {
   if (items.length === 0) {
     return (
-      <div className="py-8 text-center text-xs text-[#738096]">
+      <div className="py-8 text-center text-xs text-[#81777A]">
         No product sales recorded yet for this business.
       </div>
     );
@@ -384,18 +541,18 @@ export const TopProductsBarChart: React.FC<{
         const widthPct = Math.max(6, (item.revenue / maxRev) * 100);
         return (
           <div key={item.id} className="space-y-1.5">
-            <div className="flex items-baseline justify-between gap-3 text-sm">
-              <span className="text-[#202B3C] font-medium truncate">{item.name}</span>
-              <div className="flex items-center gap-3 shrink-0 tabular-nums font-mono text-xs">
-                <span className="text-[#738096]">{item.unitsSold.toLocaleString()} units</span>
-                <span className="text-[#101B2D] font-semibold">
-                  ${Math.round(item.revenue).toLocaleString()}
+            <div className="flex items-baseline justify-between gap-3 text-xs">
+              <span className="text-[#3F3437] font-medium truncate">{item.name}</span>
+              <div className="flex items-center gap-3 shrink-0 tabular-nums font-mono">
+                <span className="text-[#81777A]">{item.unitsSold.toLocaleString('en-IN')} units</span>
+                <span className="text-[#49383D] font-semibold">
+                  {formatINRCompact(item.revenue)}
                 </span>
               </div>
             </div>
-            <div className="h-2 w-full bg-slate-100 rounded-sm overflow-hidden">
+            <div className="h-1.5 w-full bg-[#FBF8F7] rounded-sm overflow-hidden">
               <div
-                className="h-full bg-[#263B55] rounded-sm transition-all duration-300"
+                className="h-full bg-[#49383D] rounded-sm transition-all duration-300"
                 style={{ width: `${widthPct}%` }}
               />
             </div>
@@ -420,40 +577,40 @@ export const InventoryMovementChart: React.FC<{
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-end gap-5 text-xs text-[#738096]">
+      <div className="flex items-center justify-end gap-5 text-xs text-[#81777A]">
         <span className="inline-flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#4C7FE8]" />
+          <span className="w-2.5 h-2.5 rounded-xs bg-[#779384]" />
           Stock Received
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#101B2D]" />
+          <span className="w-2.5 h-2.5 rounded-xs bg-[#805F69]" />
           Stock Sold
         </span>
       </div>
 
-      <div className="grid grid-cols-6 gap-3 items-end h-44 pt-4 border-b border-slate-200 pb-2">
+      <div className="grid grid-cols-6 gap-3 items-end h-40 pt-4 border-b border-[#E8DFE1] pb-2">
         {data.map((pt, idx) => {
           const recH = Math.max(4, (pt.received / maxVal) * 100);
           const soldH = Math.max(4, (pt.sold / maxVal) * 100);
           return (
             <div
               key={pt.weekLabel}
-              className="relative flex flex-col items-center h-full justify-end group"
+              className="relative flex flex-col items-center h-full justify-end"
               onMouseEnter={() => setHoverIdx(idx)}
               onMouseLeave={() => setHoverIdx(null)}
             >
               {hoverIdx === idx && (
-                <div className="absolute -top-9 z-10 bg-[#101B2D] text-white text-[11px] font-mono tabular-nums px-2 py-1 rounded whitespace-nowrap shadow-sm">
+                <div className="absolute -top-8 z-10 bg-[#49383D] text-white text-[11px] font-mono tabular-nums px-2 py-1 rounded whitespace-nowrap shadow-sm border border-[#805F69]">
                   In: {pt.received} · Out: {pt.sold}
                 </div>
               )}
               <div className="w-full flex items-end justify-center gap-1.5 h-full">
                 <div
-                  className="w-4 bg-[#4C7FE8] rounded-t-sm transition-all duration-200"
+                  className="w-3.5 bg-[#779384] rounded-t-xs transition-all duration-200"
                   style={{ height: `${recH}%` }}
                 />
                 <div
-                  className="w-4 bg-[#101B2D] rounded-t-sm transition-all duration-200"
+                  className="w-3.5 bg-[#805F69] rounded-t-xs transition-all duration-200"
                   style={{ height: `${soldH}%` }}
                 />
               </div>
@@ -464,10 +621,77 @@ export const InventoryMovementChart: React.FC<{
 
       <div className="grid grid-cols-6 gap-3 text-center">
         {data.map((pt) => (
-          <span key={pt.weekLabel} className="text-[11px] font-mono text-[#738096] tabular-nums">
+          <span key={pt.weekLabel} className="text-[11px] font-mono text-[#81777A] tabular-nums">
             {pt.weekLabel}
           </span>
         ))}
+      </div>
+    </div>
+  );
+};
+
+export interface ScenarioComparePoint {
+  label: string;
+  baseline: number;
+  simulated: number;
+  atRisk: boolean;
+}
+
+export const ScenarioComparisonChart: React.FC<{
+  items: ScenarioComparePoint[];
+}> = ({ items }) => {
+  const maxVal = Math.max(10, ...items.flatMap((i) => [i.baseline, i.simulated]));
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-end gap-5 text-xs text-[#81777A]">
+        <span className="inline-flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-xs bg-[#8296A8]" />
+          Baseline Demand
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-xs bg-[#805F69]" />
+          Simulated Demand
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-xs bg-[#BC7777]" />
+          Stockout Exposed
+        </span>
+      </div>
+
+      <div className="space-y-3">
+        {items.slice(0, 6).map((item) => {
+          const baseW = Math.max(4, (item.baseline / maxVal) * 100);
+          const simW = Math.max(4, (item.simulated / maxVal) * 100);
+          return (
+            <div key={item.label} className="space-y-1">
+              <div className="flex items-center justify-between gap-3 text-xs">
+                <span className="font-medium text-[#3F3437] truncate">{item.label}</span>
+                <span className="font-mono tabular-nums text-[#81777A] shrink-0">
+                  {item.baseline} →{' '}
+                  <strong className={item.atRisk ? 'text-[#A15E5E]' : 'text-[#49383D]'}>
+                    {item.simulated} units
+                  </strong>
+                </span>
+              </div>
+              <div className="space-y-1">
+                <div className="h-1.5 w-full bg-[#FBF8F7] rounded-xs overflow-hidden">
+                  <div
+                    className="h-full bg-[#8296A8] rounded-xs transition-all duration-200"
+                    style={{ width: `${baseW}%` }}
+                  />
+                </div>
+                <div className="h-1.5 w-full bg-[#FBF8F7] rounded-xs overflow-hidden">
+                  <div
+                    className={`h-full rounded-xs transition-all duration-200 ${
+                      item.atRisk ? 'bg-[#BC7777]' : 'bg-[#805F69]'
+                    }`}
+                    style={{ width: `${simW}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

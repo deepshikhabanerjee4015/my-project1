@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="note-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="note-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="note-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="note-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#note-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#note-shadow)"/>
+  
+    <rect x="240" y="102" width="330" height="402" rx="14" fill="#29434A" stroke="#1B2D32" stroke-width="3"/>
+    <!-- Spiral rings -->
+    <rect x="224" y="128" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/><rect x="224" y="170" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/><rect x="224" y="212" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/><rect x="224" y="254" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/><rect x="224" y="296" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/><rect x="224" y="338" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/><rect x="224" y="380" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/><rect x="224" y="422" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/><rect x="224" y="464" width="32" height="12" rx="6" fill="#B0BEC5" stroke="#546E7A" stroke-width="1.5"/>
+    <polygon points="275,180 540,180 540,340 275,270" fill="#52777A"/>
+    <text x="410" y="160" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="28" fill="#FFFFFF">Classmate</text>
+    <text x="410" y="255" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="18" fill="#D9E8E5">SINGLE LINE NOTEBOOK</text>
+    <text x="410" y="458" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="15" fill="#D9E8E5">200 Pages</text>
+  
+</svg>

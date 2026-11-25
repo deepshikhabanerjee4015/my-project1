@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="milton-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="milton-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="milton-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="milton-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#milton-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#milton-shadow)"/>
+  
+    <defs>
+      <linearGradient id="steel-grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#90A4AE"/>
+        <stop offset="32%" stop-color="#ECEFF1"/>
+        <stop offset="65%" stop-color="#B0BEC5"/>
+        <stop offset="100%" stop-color="#607D8B"/>
+      </linearGradient>
+    </defs>
+    <path d="M362 126 L438 126 L456 178 L456 468 Q456 496 426 498 L374 498 Q344 496 344 468 L344 178 Z" fill="url(#steel-grad)" stroke="#455A64" stroke-width="2"/>
+    <rect x="360" y="78" width="80" height="48" rx="10" fill="#78909C" stroke="#455A64" stroke-width="2"/>
+    <text x="400" y="312" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="22" fill="#263238">MILTON</text>
+    <text x="400" y="338" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="600" font-size="13" fill="#37474F">THERMOSTEEL · 1 litre</text>
+  
+</svg>

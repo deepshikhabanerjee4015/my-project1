@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="colin-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="colin-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="colin-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="colin-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#colin-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#colin-shadow)"/>
+  
+    <defs>
+      <linearGradient id="colin-liq" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#29B6F6"/>
+        <stop offset="45%" stop-color="#29B6F6" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#29B6F6"/>
+      </linearGradient>
+    </defs>
+    <!-- Bottle body -->
+    <path d="M338 96 L430 92 L456 120 L432 132 L428 164 L478 238 L478 468 Q478 496 448 498 L342 498 Q312 496 312 468 L312 246 L354 166 L354 128 L314 128 L314 108 Z" fill="url(#colin-liq)" stroke="#1E3236" stroke-opacity="0.16" stroke-width="2"/>
+    <!-- Cap -->
+    <rect x="336" y="88" width="96" height="34" rx="10" fill="#FFFFFF"/><path d="M350 122 L338 156" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+    <!-- Glass / plastic highlight -->
+    <path d="M338 96 L430 92 L456 120 L432 132 L428 164 L478 238 L478 468 Q478 496 448 498 L342 498 Q312 496 312 468 L312 246 L354 166 L354 128 L314 128 L314 108 Z" fill="url(#colin-glass)"/>
+    <path d="M342 200 Q334 320 338 455" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <!-- Label -->
+    <rect x="328" y="246" width="144" height="158" rx="14" fill="#0277BD" stroke="#FFFFFF" stroke-width="3"/>
+    <text x="400" y="290" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">Colin</text>
+    <text x="400" y="320" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="16" fill="#FFFFFF" fill-opacity="0.95">Glass Cleaner</text>
+    <text x="400" y="344" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="500" font-size="12" fill="#FFFFFF" fill-opacity="0.85">2X Shine Booster</text>
+    
+    <rect x="362" y="366" width="76" height="24" rx="12" fill="#FFFFFF" fill-opacity="0.92"/>
+    <text x="400" y="382" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="12" fill="#1E3236">500 ml</text>
+  
+</svg>

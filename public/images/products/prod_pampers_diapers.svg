@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="pamp-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="pamp-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pamp-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="pamp-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#pamp-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#pamp-shadow)"/>
+  
+    <!-- Front face -->
+    <rect x="242" y="104" width="248" height="390" rx="12" fill="#009688" stroke="#1E3236" stroke-opacity="0.14" stroke-width="2"/>
+    <!-- Side depth -->
+    <path d="M490 108 L556 128 L556 474 L490 492 Z" fill="#00695C" stroke="#1E3236" stroke-opacity="0.14" stroke-width="2"/>
+    <!-- Top highlight -->
+    <rect x="242" y="104" width="248" height="390" rx="12" fill="url(#pamp-foil)"/>
+    <!-- Brand -->
+    <rect x="272" y="138" width="188" height="46" rx="10" fill="#FFFFFF"/>
+    <text x="366" y="168" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">Pampers</text>
+    <text x="366" y="218" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="22" fill="#1E3236">Baby-Dry</text>
+    <text x="366" y="242" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="600" font-size="13" fill="#4E6166">12-Hour Overnight Protection</text>
+    
+      <text x="366" y="168" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="24" fill="#00796B">Pampers</text>
+      <circle cx="366" cy="340" r="64" fill="#FFFFFF" fill-opacity="0.92"/>
+      <path d="M332 325 Q366 365 400 325 L394 372 Q366 382 338 372 Z" fill="#E0F2F1" stroke="#00796B" stroke-width="2"/>
+    
+    <rect x="318" y="440" width="96" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.9" stroke="#1E3236" stroke-opacity="0.12"/>
+    <text x="366" y="459" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="13" fill="#1E3236">Pack</text>
+  
+</svg>

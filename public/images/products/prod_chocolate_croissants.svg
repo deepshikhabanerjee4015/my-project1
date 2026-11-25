@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="crois-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="crois-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="crois-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="crois-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#crois-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#crois-shadow)"/>
+  
+    <!-- Clear bakery clamshell box -->
+    <rect x="190" y="140" width="420" height="310" rx="28" fill="#F2F6F5" stroke="#B7C8C5" stroke-width="3"/>
+    <rect x="208" y="162" width="384" height="266" rx="20" fill="#FFFFFF" stroke="#D5E2DF" stroke-width="2"/>
+    <!-- Croissant 1 -->
+    <g transform="translate(230,210)">
+      <path d="M25 80 Q80 10 140 80 Q115 110 80 105 Q45 110 25 80 Z" fill="#C97A34" stroke="#8F4F18" stroke-width="2"/>
+      <path d="M45 68 Q80 28 118 68" stroke="#A85D1E" stroke-width="4" fill="none"/>
+      <path d="M55 48 Q75 90 95 50 Q105 90 120 60" stroke="#3D2212" stroke-width="5" stroke-linecap="round" fill="none"/>
+    </g>
+    <!-- Croissant 2 -->
+    <g transform="translate(405,215)">
+      <path d="M25 80 Q80 10 140 80 Q115 110 80 105 Q45 110 25 80 Z" fill="#D4843B" stroke="#8F4F18" stroke-width="2"/>
+      <path d="M45 68 Q80 28 118 68" stroke="#A85D1E" stroke-width="4" fill="none"/>
+      <path d="M55 48 Q75 90 95 50 Q105 90 120 60" stroke="#3D2212" stroke-width="5" stroke-linecap="round" fill="none"/>
+    </g>
+    <!-- Top bakery label -->
+    <rect x="305" y="118" width="190" height="68" rx="10" fill="#4A2C1D"/>
+    <text x="400" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="800" font-size="16" fill="#F8E2C8">ARTISAN BAKERY</text>
+    <text x="400" y="168" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="600" font-size="12" fill="#FFFFFF">Chocolate Croissants · Pack of 2</text>
+    <!-- Specular lid reflection -->
+    <path d="M225 170 L320 170 L245 360 L220 360 Z" fill="#FFFFFF" fill-opacity="0.35"/>
+  
+</svg>

@@ -28,7 +28,14 @@ function ensureDb(): SmartStockState {
     if (fs.existsSync(DB_FILE)) {
       const raw = fs.readFileSync(DB_FILE, 'utf-8');
       const parsed = JSON.parse(raw) as SmartStockState;
-      if (parsed && Array.isArray(parsed.businesses) && parsed.businesses.length > 0) {
+      const hasUpgradedSchema =
+        parsed &&
+        parsed.seedVersion === 2 &&
+        Array.isArray(parsed.businesses) &&
+        parsed.businesses.length > 0 &&
+        parsed.businesses[0]?.currency === 'INR' &&
+        (parsed.products.length === 0 || Boolean(parsed.products[0]?.barcode));
+      if (hasUpgradedSchema) {
         return parsed;
       }
     }
@@ -128,7 +135,7 @@ async function startServer() {
       id: `biz-${Date.now().toString(36)}`,
       name: body.name.trim(),
       category: body.category,
-      currency: body.currency || 'USD',
+      currency: body.currency || 'INR',
       defaultLeadTimeDays: Number(body.defaultLeadTimeDays) || 5,
       safetyStockFactor: Number(body.safetyStockFactor) || 1.1,
       planningHorizonDays: Number(body.planningHorizonDays) || 30,
@@ -182,23 +189,42 @@ async function startServer() {
       return;
     }
 
+    const normalizedSku = body.sku.trim().toUpperCase();
+    const duplicate = dbState.products.some(
+      (p) => p.businessId === businessId && p.sku.toUpperCase() === normalizedSku
+    );
+    if (duplicate) {
+      res.status(409).json({ error: `A product with SKU "${normalizedSku}" already exists in this workspace.` });
+      return;
+    }
+
     const today = new Date().toISOString().slice(0, 10);
+    const minStock = Math.max(0, Number(body.minStockLevel) || 10);
     const product: Product = {
       id: `prod-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-      sku: body.sku.trim().toUpperCase(),
+      sku: normalizedSku,
+      barcode:
+        body.barcode?.trim() ||
+        `890${Math.floor(1000000000 + Math.random() * 8999999999)}`,
       businessId,
       name: body.name.trim(),
+      brand: body.brand?.trim() || 'House Brand',
+      packagingSize: body.packagingSize?.trim() || 'Standard Pack',
       category: body.category.trim(),
+      imageUrl: body.imageUrl?.trim() || '',
       currentStock: Math.max(0, Number(body.currentStock) || 0),
-      minStockLevel: Math.max(0, Number(body.minStockLevel) || 10),
+      minStockLevel: minStock,
+      reorderLevel: Math.max(minStock, Number(body.reorderLevel) || Math.round(minStock * 1.6)),
       maxStockLevel: Math.max(10, Number(body.maxStockLevel) || 100),
-      unitPrice: Math.max(0.01, Number(body.unitPrice) || 10),
-      unitCost: Math.max(0.01, Number(body.unitCost) || 5),
+      unitPrice: Math.max(0.01, Number(body.unitPrice) || 50),
+      unitCost: Math.max(0.01, Number(body.unitCost) || 35),
       supplierName: body.supplierName?.trim() || 'Primary Supplier',
-      leadTimeDays: Math.max(1, Number(body.leadTimeDays) || 5),
+      leadTimeDays: Math.max(1, Number(body.leadTimeDays) || 4),
       incomingStock: Math.max(0, Number(body.incomingStock) || 0),
+      expiryDate: body.expiryDate?.trim() || undefined,
       seasonalTag: body.seasonalTag || 'Year-Round',
       promoActive: Boolean(body.promoActive),
+      description: body.description?.trim() || undefined,
       lastUpdated: today,
     };
 
@@ -298,22 +324,36 @@ async function startServer() {
 
     for (const row of items) {
       if (!row.name) continue;
+      const sku = (row.sku || `SKU-${Math.floor(1000 + Math.random() * 9000)}`).trim().toUpperCase();
+      if (dbState.products.some((p) => p.businessId === targetBiz && p.sku.toUpperCase() === sku)) {
+        continue;
+      }
+      const minStock = Math.max(0, Number(row.minStockLevel) || 10);
       const prod: Product = {
         id: `prod-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-        sku: (row.sku || `SKU-${Math.floor(1000 + Math.random() * 9000)}`).toUpperCase(),
+        sku,
+        barcode:
+          row.barcode?.trim() ||
+          `890${Math.floor(1000000000 + Math.random() * 8999999999)}`,
         businessId: targetBiz,
         name: String(row.name).trim(),
-        category: String(row.category || 'General Merchandise').trim(),
+        brand: String(row.brand || 'House Brand').trim(),
+        packagingSize: String(row.packagingSize || 'Standard Pack').trim(),
+        category: String(row.category || 'Groceries & Staples').trim(),
+        imageUrl: row.imageUrl?.trim() || '',
         currentStock: Math.max(0, Number(row.currentStock) || 0),
-        minStockLevel: Math.max(0, Number(row.minStockLevel) || 10),
+        minStockLevel: minStock,
+        reorderLevel: Math.max(minStock, Number(row.reorderLevel) || Math.round(minStock * 1.6)),
         maxStockLevel: Math.max(20, Number(row.maxStockLevel) || 100),
-        unitPrice: Math.max(0.01, Number(row.unitPrice) || 12),
-        unitCost: Math.max(0.01, Number(row.unitCost) || 6),
+        unitPrice: Math.max(0.01, Number(row.unitPrice) || 50),
+        unitCost: Math.max(0.01, Number(row.unitCost) || 35),
         supplierName: String(row.supplierName || 'Primary Supplier').trim(),
-        leadTimeDays: Math.max(1, Number(row.leadTimeDays) || 5),
+        leadTimeDays: Math.max(1, Number(row.leadTimeDays) || 4),
         incomingStock: Math.max(0, Number(row.incomingStock) || 0),
+        expiryDate: row.expiryDate?.trim() || undefined,
         seasonalTag: row.seasonalTag || 'Year-Round',
         promoActive: Boolean(row.promoActive),
+        description: row.description?.trim() || undefined,
         lastUpdated: today,
       };
       dbState.products.push(prod);
@@ -391,7 +431,7 @@ async function startServer() {
         product.businessId,
         newStock <= product.minStockLevel ? 'low_stock_alert' : 'stock_sold',
         `Recorded sale: ${product.name}`,
-        `Sold ${sold} units ($${(sold * product.unitPrice).toFixed(2)}). Remaining stock: ${newStock}.`,
+        `Sold ${sold} units (₹${Math.round(sold * product.unitPrice).toLocaleString('en-IN')}). Remaining stock: ${newStock}.`,
         product.id
       );
     }
@@ -494,7 +534,7 @@ async function startServer() {
       targetBiz,
       'po_created',
       `Purchase order ${po.poNumber} submitted`,
-      `Ordered ${poItems.reduce((a, b) => a + b.quantity, 0)} units across ${poItems.length} SKUs ($${totalCost.toLocaleString()}).`
+      `Ordered ${poItems.reduce((a, b) => a + b.quantity, 0)} units across ${poItems.length} SKUs (₹${Math.round(totalCost).toLocaleString('en-IN')}).`
     );
 
     saveDb(dbState);
@@ -587,6 +627,7 @@ ${JSON.stringify(summaryPayload)}
 
 Rules:
 - Reference exact product names, unit quantities, and percentages from the snapshot. Do not invent numbers.
+- Format all currency values in Indian Rupees (₹ / INR).
 - Each insight must map to a valid targetView from: "forecasting", "recommendations", "inventory", "purchase-plan", "simulator".
 - Each insight category must be one of: "demand_surge", "replenishment", "slow_moving", "seasonal", "excess_capital".`,
         config: {
@@ -653,7 +694,7 @@ Quantitative Results: ${JSON.stringify(simulationResults)}
 Provide a concise, actionable 3-part operational brief:
 1) Executive Risk Assessment (2 sentences referencing the exact simulated stockout count and capital impact)
 2) Immediate Purchasing Adjustments (specific actions for the highest-risk SKUs)
-3) Cash Flow & Buffer Recommendation (1-2 sentences).
+3) Cash Flow & Buffer Recommendation (1-2 sentences, referencing amounts in Indian Rupees ₹).
 Use plain, practical business language suitable for a store owner.`,
       });
 

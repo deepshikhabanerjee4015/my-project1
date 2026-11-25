@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="onion-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="onion-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="onion-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="onion-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#onion-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#onion-shadow)"/>
+  
+    
+      <path d="M310 248 Q391.4 340 310 424 Q228.6 340 310 248 Z" fill="#7B1FA2" stroke="#4A148C" stroke-width="3"/>
+      <path d="M310 254 Q343.3 350 310 424" stroke="#E1BEE7" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+    
+      <path d="M485 251 Q568.6 345 485 431 Q401.4 345 485 251 Z" fill="#8E24AA" stroke="#4A148C" stroke-width="3"/>
+      <path d="M485 257 Q519.2 355 485 431" stroke="#E1BEE7" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+    
+      <path d="M398 180 Q488.2 280 398 372 Q307.8 280 398 180 Z" fill="#9C27B0" stroke="#4A148C" stroke-width="3"/>
+      <path d="M398 186 Q434.9 290 398 372" stroke="#E1BEE7" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+    
+  
+</svg>

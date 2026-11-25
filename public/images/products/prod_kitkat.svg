@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="kk-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="kk-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="kk-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="kk-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#kk-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#kk-shadow)"/>
+  
+    <rect x="155" y="210" width="490" height="175" rx="14" fill="#D50000" stroke="#9B0000" stroke-width="3"/>
+    <rect x="155" y="210" width="490" height="175" rx="14" fill="url(#kk-foil)"/>
+    <ellipse cx="330" cy="298" rx="115" ry="52" fill="#FFFFFF"/>
+    <text x="330" y="313" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="42" fill="#D50000">KitKat</text>
+    <!-- 4 wafer fingers preview -->
+    <g transform="translate(475,235)">
+      <rect x="0" y="0" width="128" height="24" rx="5" fill="#5D331B" stroke="#3E1F0D" stroke-width="2"/>
+      <rect x="0" y="30" width="128" height="24" rx="5" fill="#5D331B" stroke="#3E1F0D" stroke-width="2"/>
+      <rect x="0" y="60" width="128" height="24" rx="5" fill="#5D331B" stroke="#3E1F0D" stroke-width="2"/>
+      <rect x="0" y="90" width="128" height="24" rx="5" fill="#5D331B" stroke="#3E1F0D" stroke-width="2"/>
+    </g>
+    <text x="330" y="370" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="14" fill="#FFFFFF">4 Finger Pack · Crisp Wafer in Chocolate</text>
+  
+</svg>

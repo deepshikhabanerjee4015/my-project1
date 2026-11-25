@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="orange-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="orange-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="orange-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="orange-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#orange-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#orange-shadow)"/>
+  
+    <circle cx="315" cy="340" r="86" fill="#EF6C00"/>
+    <circle cx="455" cy="325" r="92" fill="#FB8C00"/>
+    <circle cx="385" cy="255" r="82" fill="#FFA726"/>
+    <path d="M385 174 Q425 145 446 172 Q410 192 385 174 Z" fill="#43A047"/>
+    <!-- Halved citrus slice -->
+    <circle cx="490" cy="405" r="54" fill="#FB8C00" stroke="#FFF3E0" stroke-width="6"/>
+    <circle cx="490" cy="405" r="44" fill="#FF9800"/>
+    <path d="M490 361 V449 M446 405 H534 M458 373 L522 437 M522 373 L458 437" stroke="#FFF3E0" stroke-width="3"/>
+  
+</svg>

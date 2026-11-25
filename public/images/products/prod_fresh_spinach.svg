@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="spin-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="spin-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="spin-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="spin-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#spin-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#spin-shadow)"/>
+  
+    <g>
+      <path d="M360 465 L395 310 M400 465 L400 280 M440 465 L405 310" stroke="#689F38" stroke-width="12" stroke-linecap="round"/>
+      <ellipse cx="330" cy="275" rx="68" ry="102" transform="rotate(-18 330 275)" fill="#2E7D32"/>
+      <ellipse cx="470" cy="275" rx="68" ry="102" transform="rotate(18 470 275)" fill="#388E3C"/>
+      <ellipse cx="400" cy="230" rx="74" ry="112" fill="#43A047"/>
+      <rect x="352" y="388" width="96" height="16" rx="8" fill="#8D6E63"/>
+    </g>
+  
+</svg>

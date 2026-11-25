@@ -5,7 +5,9 @@ import { BrandLogo } from './BrandLogo';
 
 interface OnboardingModalProps {
   initialTab: 'signin' | 'onboard';
+  isInDemoWorkspace?: boolean;
   onClose: () => void;
+  onSignIn: (payload: { email: string }) => void;
   onEnterDemo: () => void;
   onCreateBusiness: (payload: {
     name: string;
@@ -28,7 +30,9 @@ const CATEGORIES: BusinessCategory[] = [
 
 export const OnboardingModal: React.FC<OnboardingModalProps> = ({
   initialTab,
+  isInDemoWorkspace = false,
   onClose,
+  onSignIn,
   onEnterDemo,
   onCreateBusiness,
 }) => {
@@ -50,7 +54,12 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
       setError('Please enter a valid work email address.');
       return;
     }
-    onEnterDemo();
+    if (!password.trim()) {
+      setError('Please enter your password.');
+      return;
+    }
+    setError(null);
+    onSignIn({ email: email.trim() });
   };
 
   const handleOnboard = async (e: React.FormEvent) => {
@@ -82,26 +91,26 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-[#101B2D]/60 backdrop-blur-xs flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-[#49383D]/55 backdrop-blur-xs flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="onboarding-title"
     >
-      <div className="bg-white border border-slate-200 rounded-xl w-full max-w-lg shadow-lg overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+      <div className="bg-white border border-[#E8DFE1] rounded-xl w-full max-w-lg shadow-[0_20px_50px_rgba(73,56,61,0.18)] overflow-hidden">
+        <div className="px-6 py-4 border-b border-[#E8DFE1] flex items-center justify-between">
           <BrandLogo size="sm" />
           <button
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="p-1.5 text-[#738096] hover:text-[#101B2D] rounded-md hover:bg-slate-100 cursor-pointer"
+            className="p-1.5 text-[#81777A] hover:text-[#49383D] rounded-md hover:bg-[#FBF8F7] cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         <div className="px-6 pt-5">
-          <div className="grid grid-cols-2 p-1 bg-[#F6F8FB] rounded-lg border border-slate-200">
+          <div className="grid grid-cols-2 p-1 bg-[#FBF8F7] rounded-lg border border-[#E8DFE1]">
             <button
               type="button"
               onClick={() => {
@@ -110,8 +119,8 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
               }}
               className={`py-2 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                 tab === 'onboard'
-                  ? 'bg-white text-[#101B2D] shadow-xs'
-                  : 'text-[#738096] hover:text-[#101B2D]'
+                  ? 'bg-[#E9DDE0] text-[#49383D] font-semibold'
+                  : 'text-[#81777A] hover:text-[#49383D]'
               }`}
             >
               Business Onboarding
@@ -124,8 +133,8 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
               }}
               className={`py-2 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                 tab === 'signin'
-                  ? 'bg-white text-[#101B2D] shadow-xs'
-                  : 'text-[#738096] hover:text-[#101B2D]'
+                  ? 'bg-[#E9DDE0] text-[#49383D] font-semibold'
+                  : 'text-[#81777A] hover:text-[#49383D]'
               }`}
             >
               Sign In / Demo Access
@@ -136,105 +145,107 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
         {tab === 'signin' ? (
           <form onSubmit={handleSignIn} className="p-6 space-y-4">
             <div>
-              <h2 id="onboarding-title" className="font-display text-lg font-bold text-[#101B2D]">
+              <h2 id="onboarding-title" className="font-display text-lg font-bold text-[#49383D]">
                 Sign in to SmartStock
               </h2>
-              <p className="text-xs text-[#738096] mt-0.5">
+              <p className="text-xs text-[#81777A] mt-0.5">
                 Access your configured inventory environments or enter demonstration mode.
               </p>
             </div>
 
             {error && (
-              <div className="text-xs text-[#DC5555] bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+              <div className="text-xs text-[#8E4F4F] bg-[#F9EFEF] border border-[#E6CECE] rounded-lg px-3 py-2">
                 {error}
               </div>
             )}
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-medium text-[#202B3C]">Work Email</label>
+              <label className="block text-xs font-medium text-[#3F3437]">Work Email</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C7FE8]"
+                className="w-full px-3 py-2 text-sm bg-white border border-[#E8DFE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#805F69]"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-medium text-[#202B3C]">Password</label>
+              <label className="block text-xs font-medium text-[#3F3437]">Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C7FE8]"
+                className="w-full px-3 py-2 text-sm bg-white border border-[#E8DFE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#805F69]"
               />
             </div>
 
             <div className="pt-2 flex flex-col gap-2.5">
               <button
                 type="submit"
-                className="w-full py-2.5 text-sm font-medium text-white bg-[#101B2D] hover:bg-[#263B55] rounded-lg transition-colors cursor-pointer"
+                className="w-full py-2.5 text-sm font-medium text-white bg-[#805F69] hover:bg-[#6B4E57] rounded-lg transition-colors cursor-pointer"
               >
-                Continue to Workspace
+                Sign In to Workspace
               </button>
               <button
                 type="button"
                 onClick={onEnterDemo}
-                className="w-full py-2.5 text-sm font-medium text-[#101B2D] bg-[#F6F8FB] hover:bg-slate-200/70 border border-slate-200 rounded-lg transition-colors cursor-pointer"
+                className="w-full py-2.5 text-sm font-medium text-[#805F69] bg-white hover:bg-[#FBF8F7] hover:text-[#49383D] border border-[#805F69]/50 rounded-lg transition-colors cursor-pointer"
               >
-                Enter Instant Demo Mode (3 Sample Businesses)
+                {isInDemoWorkspace
+                  ? 'Continue Browsing Demo Mode'
+                  : 'Enter Instant Demo Mode (3 Sample Businesses)'}
               </button>
             </div>
           </form>
         ) : (
           <form onSubmit={handleOnboard} className="p-6 space-y-4">
             <div>
-              <h2 id="onboarding-title" className="font-display text-lg font-bold text-[#101B2D]">
+              <h2 id="onboarding-title" className="font-display text-lg font-bold text-[#49383D]">
                 Configure Your Inventory Environment
               </h2>
-              <p className="text-xs text-[#738096] mt-0.5">
+              <p className="text-xs text-[#81777A] mt-0.5">
                 Tailor lead time defaults, safety buffers, and starter SKUs for your store type.
               </p>
             </div>
 
             {error && (
-              <div className="text-xs text-[#DC5555] bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+              <div className="text-xs text-[#8E4F4F] bg-[#F9EFEF] border border-[#E6CECE] rounded-lg px-3 py-2">
                 {error}
               </div>
             )}
 
             <div className="grid sm:grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <label className="block text-xs font-medium text-[#202B3C]">Business Name</label>
+                <label className="block text-xs font-medium text-[#3F3437]">Business Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Oakridge Grocers"
                   value={bizName}
                   onChange={(e) => setBizName(e.target.value)}
                   required
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C7FE8]"
+                  className="w-full px-3 py-2 text-sm bg-white border border-[#E8DFE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#805F69]"
                 />
               </div>
               <div className="space-y-1.5">
-                <label className="block text-xs font-medium text-[#202B3C]">Your Name</label>
+                <label className="block text-xs font-medium text-[#3F3437]">Your Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Maya Lin"
                   value={ownerName}
                   onChange={(e) => setOwnerName(e.target.value)}
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C7FE8]"
+                  className="w-full px-3 py-2 text-sm bg-white border border-[#E8DFE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#805F69]"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-medium text-[#202B3C]">Business Category</label>
+              <label className="block text-xs font-medium text-[#3F3437]">Business Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as BusinessCategory)}
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#4C7FE8]"
+                className="w-full px-3 py-2 text-sm border border-[#E8DFE1] rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#805F69]"
               >
                 {CATEGORIES.map((c) => (
                   <option key={c} value={c}>
@@ -246,7 +257,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
 
             <div className="grid sm:grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <label className="block text-xs font-medium text-[#202B3C]">
+                <label className="block text-xs font-medium text-[#3F3437]">
                   Default Supplier Lead Time (Days)
                 </label>
                 <input
@@ -255,12 +266,12 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                   max={60}
                   value={leadTime}
                   onChange={(e) => setLeadTime(Number(e.target.value))}
-                  className="w-full px-3 py-2 text-sm font-mono tabular-nums border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4C7FE8]"
+                  className="w-full px-3 py-2 text-sm font-mono tabular-nums bg-white border border-[#E8DFE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#805F69]"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="block text-xs font-medium text-[#202B3C]">
+                <label className="block text-xs font-medium text-[#3F3437]">
                   Safety Stock Policy
                 </label>
                 <select
@@ -268,7 +279,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                   onChange={(e) =>
                     setSafetyMode(e.target.value as 'lean' | 'balanced' | 'conservative')
                   }
-                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#4C7FE8]"
+                  className="w-full px-3 py-2 text-sm border border-[#E8DFE1] rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#805F69]"
                 >
                   <option value="lean">Lean (Lower holding cost)</option>
                   <option value="balanced">Balanced (Recommended)</option>
@@ -277,14 +288,14 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
               </div>
             </div>
 
-            <label className="flex items-start gap-2.5 p-3 rounded-lg bg-[#F6F8FB] border border-slate-200 cursor-pointer">
+            <label className="flex items-start gap-2.5 p-3 rounded-lg bg-[#FBF8F7] border border-[#E8DFE1] cursor-pointer">
               <input
                 type="checkbox"
                 checked={includeStarter}
                 onChange={(e) => setIncludeStarter(e.target.checked)}
-                className="mt-0.5 accent-[#16A36A]"
+                className="mt-0.5 accent-[#805F69]"
               />
-              <span className="text-xs text-[#202B3C]">
+              <span className="text-xs text-[#3F3437]">
                 Pre-populate with realistic 90-day starter products and sales history for{' '}
                 <strong>{category}</strong> (recommended for testing forecasts immediately).
               </span>
@@ -293,7 +304,7 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-2.5 text-sm font-medium text-white bg-[#16A36A] hover:bg-[#138a59] disabled:opacity-60 rounded-lg transition-colors cursor-pointer"
+              className="w-full py-2.5 text-sm font-medium text-white bg-[#805F69] hover:bg-[#6B4E57] disabled:opacity-60 rounded-lg transition-colors cursor-pointer"
             >
               {submitting ? 'Creating Environment...' : 'Launch SmartStock Workspace'}
             </button>

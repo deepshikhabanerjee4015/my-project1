@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="fanta-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="fanta-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fanta-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="fanta-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#fanta-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#fanta-shadow)"/>
+  
+    <defs>
+      <linearGradient id="fanta-liq" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#FF6F00"/>
+        <stop offset="45%" stop-color="#FF6F00" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#FF6F00"/>
+      </linearGradient>
+    </defs>
+    <!-- Bottle body -->
+    <path d="M366 116 L434 116 L444 156 Q484 198 482 254 L472 308 L480 356 L474 470 Q474 496 444 498 L356 498 Q326 496 326 470 L320 356 L328 308 L318 254 Q316 198 356 156 Z" fill="url(#fanta-liq)" stroke="#1E3236" stroke-opacity="0.16" stroke-width="2"/>
+    <!-- Cap -->
+    <rect x="364" y="76" width="72" height="44" rx="8" fill="#1565C0"/><rect x="360" y="108" width="80" height="12" rx="4" fill="#1565C0" stroke="#000" stroke-opacity="0.12"/>
+    <!-- Glass / plastic highlight -->
+    <path d="M366 116 L434 116 L444 156 Q484 198 482 254 L472 308 L480 356 L474 470 Q474 496 444 498 L356 498 Q326 496 326 470 L320 356 L328 308 L318 254 Q316 198 356 156 Z" fill="url(#fanta-glass)"/>
+    <path d="M342 200 Q334 320 338 455" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="10" stroke-linecap="round" fill="none"/>
+    <!-- Label -->
+    <rect x="328" y="246" width="144" height="158" rx="14" fill="#1565C0" stroke="#FFCA28" stroke-width="3"/>
+    <text x="400" y="290" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">FANTA</text>
+    <text x="400" y="320" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="16" fill="#FFFFFF" fill-opacity="0.95">Orange</text>
+    <text x="400" y="344" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="500" font-size="12" fill="#FFFFFF" fill-opacity="0.85">Fruity Sparkling</text>
+    
+    <rect x="362" y="366" width="76" height="24" rx="12" fill="#FFFFFF" fill-opacity="0.92"/>
+    <text x="400" y="382" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="12" fill="#1E3236">750 ml</text>
+  
+</svg>

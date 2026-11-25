@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="alpen-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="alpen-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="alpen-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="alpen-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#alpen-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#alpen-shadow)"/>
+  
+    <defs>
+      <linearGradient id="alpen-pouch" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F9E6C8"/>
+        <stop offset="100%" stop-color="#D84315"/>
+      </linearGradient>
+    </defs>
+    <!-- Pouch Body -->
+    <path d="M248 92 L552 92 L566 126 L562 478 Q562 496 544 498 L256 498 Q238 496 238 478 L234 126 Z" fill="url(#alpen-pouch)" stroke="#1B2A2D" stroke-opacity="0.15" stroke-width="2"/>
+    <!-- Top & bottom crimp seals -->
+    <rect x="246" y="88" width="308" height="20" rx="4" fill="#F9E6C8" stroke="#000" stroke-opacity="0.12"/>
+    <path d="M254 98 H546" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="4 4"/>
+    <rect x="242" y="482" width="316" height="16" rx="4" fill="#D84315" stroke="#000" stroke-opacity="0.12"/>
+    <!-- Foil sheen -->
+    <path d="M248 92 L552 92 L566 126 L562 478 Q562 496 544 498 L256 498 Q238 496 238 478 L234 126 Z" fill="url(#alpen-foil)"/>
+    <!-- Brand banner -->
+    <rect x="285" y="132" width="230" height="54" rx="12" fill="#B71C1C"/>
+    <text x="400" y="167" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="25" fill="#FFFFFF" letter-spacing="0.5">ALPENLIEBE</text>
+    <!-- Product title -->
+    <text x="400" y="218" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="26" fill="#FFFFFF">Rich Milky Caramel</text>
+    <text x="400" y="244" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="600" font-size="14" fill="#FFFFFF" fill-opacity="0.9">Smooth Caramel Candies</text>
+    <!-- Visual Window / Illustration -->
+    <rect x="278" y="264" width="244" height="155" rx="22" fill="#FFF8EE" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="3"/>
+    
+      <circle cx="360" cy="340" r="32" fill="#D9822B" stroke="#8C4A0E" stroke-width="3"/>
+      <path d="M335 340 Q360 315 385 340 Q360 365 335 340 Z" fill="#FFF3D6"/>
+      <circle cx="440" cy="345" r="30" fill="#E2953B" stroke="#8C4A0E" stroke-width="3"/>
+      <path d="M418 345 Q440 325 462 345 Q440 365 418 345 Z" fill="#FFF3D6"/>
+    
+    <!-- Weight Pill -->
+    <rect x="348" y="434" width="104" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.92"/>
+    <text x="400" y="454" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="14" fill="#1F2F33">Pack</text>
+  
+</svg>

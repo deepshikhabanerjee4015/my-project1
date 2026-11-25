@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="ferr-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="ferr-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ferr-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="ferr-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#ferr-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#ferr-shadow)"/>
+  
+    <!-- Clear Gift Box with Gold Base -->
+    <rect x="190" y="155" width="420" height="295" rx="16" fill="#F8F9FA" stroke="#C6A56A" stroke-width="4"/>
+    <rect x="206" y="275" width="388" height="162" rx="10" fill="#C6922C"/>
+    <!-- 4x3 grid of golden truffle spheres -->
+    
+      <g transform="translate(255, 212)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(351, 212)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(447, 212)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(543, 212)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(255, 270)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(351, 270)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(447, 270)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(543, 270)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(255, 328)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(351, 328)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(447, 328)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+      <g transform="translate(543, 328)">
+        <circle cx="0" cy="0" r="24" fill="#E6B44A" stroke="#9C711B" stroke-width="2"/>
+        <circle cx="-6" cy="-7" r="7" fill="#FFF3C4" fill-opacity="0.7"/>
+        <ellipse cx="0" cy="-16" rx="11" ry="4" fill="#FFFFFF" stroke="#B7922E" stroke-width="1"/>
+      </g>
+    
+    <!-- Gold label -->
+    <ellipse cx="400" cy="195" rx="92" ry="34" fill="#FFFFFF" stroke="#C6922C" stroke-width="3"/>
+    <text x="400" y="193" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="800" font-size="16" fill="#6D4C12">FERRERO ROCHER</text>
+    <text x="400" y="212" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="12" fill="#9C711B">16 Pieces Fine Hazelnut</text>
+  
+</svg>

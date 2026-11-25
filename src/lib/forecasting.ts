@@ -600,12 +600,12 @@ export function generateRecommendations(params: {
       urgency = 'high';
       reason = `Net available stock (${netAvailable} units) has fallen below the calculated reorder point (${reorderPoint} units).`;
       suggestedAction = `Add ${recommendedOrderQty} units to your purchase plan by ${suggestedReorderDate}.`;
-    } else if (daysOfSupply !== null && daysOfSupply > 85 && product.currentStock * product.unitCost > 350) {
+    } else if (daysOfSupply !== null && daysOfSupply > 55 && product.currentStock * product.unitCost > 4000) {
       type = 'excess_inventory';
       urgency = 'medium';
-      reason = `${daysOfSupply} days of supply on hand ($${Math.round(
+      reason = `${daysOfSupply} days of supply on hand (₹${Math.round(
         product.currentStock * product.unitCost
-      ).toLocaleString()} capital tied up), well above the ${business.planningHorizonDays}-day planning target.`;
+      ).toLocaleString('en-IN')} capital tied up), well above the ${business.planningHorizonDays}-day planning target.`;
       suggestedAction = 'Pause replenishment and consider a targeted bundle or markdown to free working capital.';
     } else if (forecast30.demandGrowthPct >= 14) {
       type = 'rising_demand';

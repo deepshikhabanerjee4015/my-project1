@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="bourb-bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#F9FBFA"/>
+      <stop offset="100%" stop-color="#EEF4F2"/>
+    </radialGradient>
+    <radialGradient id="bourb-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3236" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#1E3236" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1E3236" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bourb-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="bourb-foil" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.32"/>
+      <stop offset="35%" stop-color="#FFFFFF" stop-opacity="0.0"/>
+      <stop offset="68%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bourb-bg)"/>
+  <ellipse cx="400" cy="512" rx="185" ry="26" fill="url(#bourb-shadow)"/>
+  
+    <rect x="155" y="210" width="490" height="190" rx="18" fill="#4B1F6F" stroke="#2D1047" stroke-width="3"/>
+    <rect x="155" y="210" width="490" height="190" rx="18" fill="url(#bourb-foil)"/>
+    <path d="M142 220 L155 210 L155 400 L142 390 Z M658 220 L645 210 L645 400 L658 390 Z" fill="#361453"/>
+    <text x="275" y="268" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="20" fill="#F2D17A">Cadbury</text>
+    <text x="275" y="316" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="40" fill="#FFFFFF">BOURBON</text>
+    <text x="275" y="346" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="600" font-size="14" fill="#E6D5F7">Chocolate Cream Biscuits · 150 g</text>
+    <!-- Stacked Bourbon biscuits -->
+    <g transform="translate(465,245) rotate(-8)">
+      <rect x="0" y="0" width="128" height="64" rx="10" fill="#4A2718" stroke="#2D160C" stroke-width="2"/>
+      <rect x="8" y="22" width="112" height="14" fill="#2A120A"/>
+      <circle cx="28" cy="14" r="2" fill="#FFF" fill-opacity="0.6"/><circle cx="58" cy="14" r="2" fill="#FFF" fill-opacity="0.6"/><circle cx="88" cy="14" r="2" fill="#FFF" fill-opacity="0.6"/>
+      <circle cx="28" cy="48" r="2" fill="#FFF" fill-opacity="0.6"/><circle cx="58" cy="48" r="2" fill="#FFF" fill-opacity="0.6"/><circle cx="88" cy="48" r="2" fill="#FFF" fill-opacity="0.6"/>
+    </g>
+    <g transform="translate(485,295) rotate(6)">
+      <rect x="0" y="0" width="128" height="64" rx="10" fill="#5A301E" stroke="#2D160C" stroke-width="2"/>
+      <rect x="8" y="24" width="112" height="12" fill="#2A120A"/>
+    </g>
+  
+</svg>
